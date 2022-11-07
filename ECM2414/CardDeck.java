@@ -1,3 +1,5 @@
+package ECM2414;
+
 public class CardDeck {
     private int numberOfCards;
     private Card[] cards;

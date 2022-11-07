@@ -1,3 +1,5 @@
+package ECM2414;
+
 public class CardGame implements Runnable  {
     public static void main(String[] args) {
         
