@@ -22,7 +22,7 @@ public class Player {
 
     private boolean checkIfWon() {
         for (DeckCollection.Deck.Card c : hand) {
-            if (!(c.getValue() == hand.get(0).getValue())) {
+            if (! (c.getValue() == hand.get(0).getValue())) {
                 return false;
             }
         }
