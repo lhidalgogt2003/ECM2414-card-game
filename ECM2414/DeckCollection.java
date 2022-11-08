@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeckCollection {
-    class Deck {
+     class Deck {
         class Card {
             private final int value;
 
@@ -16,7 +16,10 @@ public class DeckCollection {
                 return value;
             }
         }
-        List<Card> cards = new ArrayList<>();
+        static List<Card> cards = new ArrayList<>();
+        public Deck() {
+
+        }
         public Card draw() {
             return cards.remove(0);
         }
@@ -24,15 +27,16 @@ public class DeckCollection {
             cards.add(card);
         }
     }
-    List<Deck> decks = new ArrayList<>();
-    public Deck.Card draw(int playerNumber) {
+    static List<Deck> decks = new ArrayList<>();
+    public static Deck.Card draw(int playerNumber) {
         return decks.get(playerNumber).draw();
     }
-    public void discard(int playerNumber, Deck.Card card) {
+    public static void discard(int playerNumber, Deck.Card card) {
         if (playerNumber == decks.size()) {
             decks.get(0).discard(card);
         } else {
             decks.get(playerNumber+1).discard(card);
         }
     }
+
 }

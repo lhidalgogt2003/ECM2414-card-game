@@ -16,8 +16,8 @@ public class Player {
         hand.add(c);
     }
 
-    public synchronized void main() {
-
+    public void main() {
+        DeckCollection.draw(playerNumber);
     }
 
     private boolean checkIfWon() {
