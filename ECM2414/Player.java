@@ -16,7 +16,7 @@ public class Player {
         hand.add(c);
     }
 
-    public void main() {
+    public void play() {
         DeckCollection.draw(playerNumber);
     }
 
