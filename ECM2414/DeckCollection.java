@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeckCollection {
-     static class Deck {
-        static class Card {
+    static class Deck {
+        class Card {
             private final int value;
 
             Card(int value){
@@ -16,10 +16,7 @@ public class DeckCollection {
                 return value;
             }
         }
-        static List<Card> cards = new ArrayList<>();
-        public Deck() {
-
-        }
+        List<Card> cards = new ArrayList<>();
         public Card draw() {
             return cards.remove(0);
         }
@@ -38,5 +35,4 @@ public class DeckCollection {
             decks.get(playerNumber+1).discard(card);
         }
     }
-
 }
