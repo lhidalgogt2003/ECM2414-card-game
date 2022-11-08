@@ -21,7 +21,12 @@ public class Player {
     }
 
     private boolean checkIfWon() {
-        return hand.isEmpty() || Collections.frequency(hand, hand.get(0)) == hand.size();
+        for (DeckCollection.Deck.Card c : hand) {
+            if (!(c.getValue() == hand.get(0).getValue())) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
