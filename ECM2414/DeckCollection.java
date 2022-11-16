@@ -32,7 +32,7 @@ public class DeckCollection {
         if (playerNumber == decks.size()) {
             decks.get(0).discard(card);
         } else {
-            decks.get(playerNumber+1).discard(card);
+            decks.get(playerNumber).discard(card);
         }
     }
 }
