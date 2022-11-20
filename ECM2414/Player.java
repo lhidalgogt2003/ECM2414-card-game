@@ -93,6 +93,10 @@ public class Player implements Runnable {
 				logger.println(String.format("player %d current hand %s", id, getHand()));
 			}
 		}
+		int wonBy = state.getWonBy();
+		if (wonBy != id) {
+			logger.println(String.format("player %d has informed player %d that player %d has won", wonBy, id, wonBy));
+		}
 		logger.println(String.format("player %d exits ", id));
 		logger.println(String.format("player %d final hand %s", id, getHand()));
 		logger.close();
