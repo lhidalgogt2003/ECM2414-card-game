@@ -29,9 +29,15 @@ public class CardGame {
 				 executorService.execute(players[i]);
 			 }
 			 executorService.shutdown();
+			 while (!state.isOver()) {
+			 	Thread.sleep(1000);
+			 }
+			 System.out.printf("player %d wins%n", state.getWonBy());
 			 in.close();
 		} catch (InvalidPackException | FileNotFoundException e) {
 			System.out.println(e.getMessage());
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 	

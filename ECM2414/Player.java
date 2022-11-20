@@ -73,6 +73,7 @@ public class Player implements Runnable {
 			if (hasWon()) {
 				logger.println(String.format("player %d wins ", id));
 				state.setIsOver();
+				state.setWonBy(id);
 			} else {
 				try {
 					Thread.sleep(100);
