@@ -133,10 +133,10 @@ public class CardGame {
 				pack.add(new Card(in.nextInt()));
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			throw new InvalidPackException("File not found");
 		}
 		if (pack.size() != 8 * n) {
-			throw new InvalidPackException();
+			throw new InvalidPackException("Invalid length");
 		}
 		return pack;
 	}

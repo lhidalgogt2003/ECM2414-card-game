@@ -7,7 +7,7 @@ public class InvalidPackException extends Exception {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	public InvalidPackException() {
-		super("Invalid pack");
+	public InvalidPackException(String s) {
+		super(s);
 	}
 }
