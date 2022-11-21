@@ -6,8 +6,25 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+
+
+/**
+ * CardGame is a multi-threaded application that
+ * uses multiple threads to create a card game of
+ * the number of players choosen by the user
+ * 
+ * @authors George Hynes, Luis Hidalgo
+ * @version 1.0
+ */
+
+
 public class CardGame {
 
+    /**
+	 * starts the Card game and asks the user to enter the number of players
+     * and where to save the information of the game
+	 * @param String[] args
+ 	*/  
 	public static void main(String[] args) {
 		try {
 			Scanner in = new Scanner(System.in);
@@ -40,7 +57,12 @@ public class CardGame {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * sets a deck to the left and to the right
+     * to the player with index i
+	 * @param Player[] players 
+     * @param Deck[] decks
+ 	*/  
 	public static void assignDecks(Player[] players, Deck[] decks) {
 		for (int i = 0; i < players.length; i++) {
 			players[i].setLeftDeck(decks[i]);
@@ -48,6 +70,13 @@ public class CardGame {
 		}
 	}
 	
+    /**
+	 * distributes the cards to each player
+     * checking the number of players
+     * @param Deck pack
+	 * @param Player[] players
+     * @param Deck[] decks
+ 	*/  
 	public static void distributeCards(Deck pack, Player[] players, Deck[] decks) {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < players.length; j++) {
@@ -62,6 +91,13 @@ public class CardGame {
 		}
 	}
 
+    /**
+	 * starts the number of player in the game
+     * @param int n
+	 * @param GameState state
+     * @throws FileNotFoundExeption
+     * @return a list of players
+ 	*/  
 	public static Player[] initializePlayers(int n, GameState state) throws FileNotFoundException {
 		Player[] players = new Player[n];
 		for (int i = 0; i < n; i++) {
@@ -70,6 +106,11 @@ public class CardGame {
 		return players;
 	}
 
+    /**
+	 * starts the number of decks in the game
+     * @param int n
+     * @return a list of decks
+ 	*/ 
 	public static Deck[] initializeDecks(int n) {
 		Deck[] decks = new Deck[n];
 		for (int i = 0; i < n; i++) {
@@ -78,6 +119,13 @@ public class CardGame {
 		return decks;
 	}
 
+    /**
+	 * loads the pack to play the game
+     * @param String filename
+	 * @param int n
+     * @throws InvalidPackException
+     * @return the pack to play the game
+ 	*/ 
 	public static Deck loadPack(String filename, int n) throws InvalidPackException {
 		Deck pack = new Deck(0);
 		try (Scanner in = new Scanner(new File(filename))) {
