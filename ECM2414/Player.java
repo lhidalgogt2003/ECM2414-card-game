@@ -21,7 +21,7 @@ public class Player implements Runnable {
 		logger = new PrintWriter(new File(String.format("player%d.txt", id)));
 	}
 
-	private String getHand() {
+	String getHand() {
 		StringBuilder sb = new StringBuilder();
 		for (Card c : hand) {
 			sb.append(c);
