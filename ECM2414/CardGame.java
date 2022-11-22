@@ -11,9 +11,9 @@ import java.util.concurrent.Executors;
 /**
  * CardGame is a multi-threaded application that
  * uses multiple threads to create a card game of
- * the number of players choosen by the user
+ * the number of players chosen by the user
  * 
- * @authors George Hynes, Luis Hidalgo
+ * @author George Hynes, Luis Hidalgo
  * @version 1.0
  */
 
@@ -23,7 +23,7 @@ public class CardGame {
     /**
 	 * starts the Card game and asks the user to enter the number of players
      * and where to save the information of the game
-	 * @param String[] args
+	 * @param args runtime arguments
  	*/  
 	public static void main(String[] args) {
 		try {
@@ -42,9 +42,9 @@ public class CardGame {
 			assignDecks(players, decks);
 			
 			 ExecutorService executorService = Executors.newFixedThreadPool(n);
-			 for (int i = 0; i < players.length; i++) {
-				 executorService.execute(players[i]);
-			 }
+			for (Player player : players) {
+				executorService.execute(player);
+			}
 			 executorService.shutdown();
 			 while (!state.isOver()) {
 			 	Thread.sleep(1000);
@@ -60,8 +60,8 @@ public class CardGame {
 	/**
 	 * sets a deck to the left and to the right
      * to the player with index i
-	 * @param Player[] players 
-     * @param Deck[] decks
+	 * @param players 	players to be assigned left and right decks
+     * @param decks		decks to assign to players
  	*/  
 	public static void assignDecks(Player[] players, Deck[] decks) {
 		for (int i = 0; i < players.length; i++) {
@@ -73,29 +73,28 @@ public class CardGame {
     /**
 	 * distributes the cards to each player
      * checking the number of players
-     * @param Deck pack
-	 * @param Player[] players
-     * @param Deck[] decks
+     * @param pack 		of cards to be distributed to players and to form decks
+	 * @param players	to be given cards from the pack
+     * @param decks		to receive remaining cards
  	*/  
 	public static void distributeCards(Deck pack, Player[] players, Deck[] decks) {
 		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < players.length; j++) {
-				players[j].addCard(pack.draw());
+			for (Player player : players) {
+				player.addCard(pack.draw());
 			}
 		}
 		
 		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < decks.length; j++) {
-				decks[j].add(pack.draw());
+			for (Deck deck : decks) {
+				deck.add(pack.draw());
 			}
 		}
 	}
 
     /**
 	 * starts the number of player in the game
-     * @param int n
-	 * @param GameState state
-     * @throws FileNotFoundExeption
+     * @param n			number of players
+	 * @param state		GameState for players to use
      * @return a list of players
  	*/  
 	public static Player[] initializePlayers(int n, GameState state) throws FileNotFoundException {
@@ -108,8 +107,8 @@ public class CardGame {
 
     /**
 	 * starts the number of decks in the game
-     * @param int n
-     * @return a list of decks
+     * @param n players :. n decks
+     * @return an array of decks
  	*/ 
 	public static Deck[] initializeDecks(int n) {
 		Deck[] decks = new Deck[n];
@@ -121,9 +120,8 @@ public class CardGame {
 
     /**
 	 * loads the pack to play the game
-     * @param String filename
-	 * @param int n
-     * @throws InvalidPackException
+     * @param filename to load pack from
+	 * @param n number of players
      * @return the pack to play the game
  	*/ 
 	public static Deck loadPack(String filename, int n) throws InvalidPackException {

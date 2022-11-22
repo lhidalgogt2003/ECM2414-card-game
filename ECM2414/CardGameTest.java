@@ -1,13 +1,13 @@
 package ECM2414;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CardGameTest {
 
@@ -53,8 +53,8 @@ class CardGameTest {
 			CardGame.assignDecks(players, decks);
 
 			ExecutorService executorService = Executors.newFixedThreadPool(n);
-			for (int i = 0; i < players.length; i++) {
-				executorService.execute(players[i]);
+			for (Player player : players) {
+				executorService.execute(player);
 			}
 			executorService.shutdown();
 			executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
@@ -64,11 +64,7 @@ class CardGameTest {
 			}
 			
 			assertTrue(hasWon);
-		} catch (InvalidPackException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (InvalidPackException | InterruptedException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -81,6 +77,6 @@ class CardGameTest {
 		           () -> CardGame.loadPack("invalid.txt", 4),
 		           "Expected loadPack() to throw an Invalid Pack Exception"
 		    );
-		    assertTrue(thrown.getMessage().contains(""));
+		assertTrue(thrown.getMessage().contains("File not found"));
 	}
 }

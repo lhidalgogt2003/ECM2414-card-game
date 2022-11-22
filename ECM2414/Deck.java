@@ -8,22 +8,22 @@ import java.util.ArrayList;
  * gets the id of each card and stores them
  * in an arraylist and checks if there
  * are no cards in the deck
- * @authors George Hynes, Luis Hidalgo
+ * @author George Hynes, Luis Hidalgo
  * @version 1.0
  * 
  */
 
 public class Deck {
-	private int id;
-	private ArrayList<Card> cards;
+	private final int id;
+	private final ArrayList<Card> cards;
 	
 	/**
 	 * gets the id of each card into an array list
-	 * @param iht id 
+	 * @param id of deck for construction
  	*/  
 	public Deck(int id) {
 		this.id = id;
-		cards = new ArrayList<Card>();
+		cards = new ArrayList<>();
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class Deck {
 	/**
 	 * synchronises the arraylist of cards
 	 * and adds a card to the deck
-	 * @param Card card
+	 * @param card to add to deck
  	*/  
 	public void add(Card card) {
 		synchronized (cards) {

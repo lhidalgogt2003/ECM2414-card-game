@@ -1,42 +1,38 @@
 package ECM2414;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
-
 
 /**
  * Player is a class that implements runnable
  * gets the card from the card class
  * gives a hand to each player
  * and determines how has won the game
- * @authors George Hynes, Luis Hidalgo
+ * @author George Hynes, Luis Hidalgo
  * @version 1.0
  *
  */
-
 public class Player implements Runnable {
-	private int id;
-	private ArrayList<Card> hand;
+	private final int id;
+	private final ArrayList<Card> hand;
 	private Deck left;
 	private Deck right;
-	private GameState state;
-	private PrintWriter logger;
+	private final GameState state;
+	private final PrintWriter logger;
 
     /**
 	 * gets the id, hand and state of the game of the player
      * and logs to the file
-	 * @param int id
-     * @param GameState state
-     * @throws FileNotFoundException
+	 * @param id of the player to construct
+     * @param state GameState of game
  	*/
 	public Player(int id, GameState state) throws FileNotFoundException {
 		this.id = id;
-		this.hand = new ArrayList<Card>();
+		this.hand = new ArrayList<>();
 		this.state = state;
-		logger = new PrintWriter(new File(String.format("player%d.txt", id)));
+		logger = new PrintWriter(String.format("player%d.txt", id));
 	}
 
 	/**
@@ -51,29 +47,33 @@ public class Player implements Runnable {
 		}
 		return sb.toString();
 	}
+
     /**
 	 * adds a card to the hand of the player
-	 * @param Card card
+	 * @param card to add
  	*/
 	public void addCard(Card card) {
 		hand.add(card);
 	}
+
     /**
 	 * sets the left deck
-	 * @param Deck deck
+	 * @param deck to be the left deck
  	*/
 	public void setLeftDeck(Deck deck) {
 		left = deck;
 	}
+
     /**
 	 * sets the right deck
-	 * @param Deck deck
+	 * @param deck to be the right deck
  	*/
 	public void setRightDeck(Deck deck) {
 		right = deck;
 	}
+
     /**
-	 * the method suffles the cards, draws
+	 * the method shuffles the cards, draws
      * the card from the left deck
      * and removes a card from the player hand
      * to the right deck
@@ -86,7 +86,6 @@ public class Player implements Runnable {
 		if (card.getFaceValue() == id) {
 			for (int i = 1; i < 4; i++) {
 				if (id != hand.get(i).getFaceValue()) {
-					card = hand.get(i);
 					removeIndex = i;
 				}
 			}
@@ -148,6 +147,5 @@ public class Player implements Runnable {
 		logger.println(String.format("player %d exits ", id));
 		logger.println(String.format("player %d final hand %s", id, getHand()));
 		logger.close();
-
 	}
 }
