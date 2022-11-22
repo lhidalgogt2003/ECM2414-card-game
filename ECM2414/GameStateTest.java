@@ -9,9 +9,9 @@ class GameStateTest {
 	@Test
 	void test() {
 		GameState state = new GameState();
-		assertEquals(false, state.isOver());
+		assertFalse(state.isOver());
 		state.setIsOver();
-		assertEquals(true, state.isOver());
+		assertTrue(state.isOver());
 	}
 
 }
