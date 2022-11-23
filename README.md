@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This game is a pair-programming project that uses a multi-threading interface to run a card game with a number of players _n_ and a number of decks (also _n_). 
+This game is a pair-programming project that uses a multi-threading interface to run a card game with a number of players _n_, and a number of decks (also _n_). 
 The decks and players form a ring topology. 
 At the start of the game, each player is distributed four cards in a round-robin fashion, from the top of the pack.
 After the hands have been dealt, the decks will then be filled from the remaining cards in the pack, again in a round-robin fashion.
