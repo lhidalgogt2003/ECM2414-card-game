@@ -22,6 +22,11 @@ The tests are designed for use with JUnit 5.7.0.
 - **GameStateTest**
 - **PlayerTest**  
 
+Run tests:
+```
+java -jar junit-platform-console-standalone-1.9.1.jar -cp ECM2414 --select-package tests
+```
+
 ### Running
 
 To run the game, run the **jar file**, enter number of **players** and location of the **pack file** to use - sample pack file provided.
