@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CardGameTest {
 
 	@Test
-	void test1() {
+	void testPackLoad() {
 		Deck pack;
 		try {
 			pack = CardGame.loadPack("four.txt", 4);
@@ -23,16 +23,16 @@ class CardGameTest {
 	}
 
 	@Test
-	void test2() {
-		Deck[] decks = CardGame.initializeDecks(4);
+	void testDecksInitialisation() {
+		Deck[] decks = CardGame.initialiseDecks(4);
 		assertEquals(4, decks.length);
 	}
 
 	@Test
-	void test3() {
+	void testPlayersInitialisation() {
 		Player[] players;
 		try {
-			players = CardGame.initializePlayers(4, new GameState());
+			players = CardGame.initialisePlayers(4, new GameState());
 			assertEquals(4, players.length);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -40,14 +40,14 @@ class CardGameTest {
 	}
 
 	@Test
-	void test4() {
+	void testGameFinishesWithWinner() {
 		int n = 4;
 		Deck pack;
 		try {
 			pack = CardGame.loadPack("four.txt", n);
 			GameState state = new GameState();
-			Player[] players = CardGame.initializePlayers(n, state);
-			Deck[] decks = CardGame.initializeDecks(n);
+			Player[] players = CardGame.initialisePlayers(n, state);
+			Deck[] decks = CardGame.initialiseDecks(n);
 
 			CardGame.distributeCards(pack, players, decks);
 			CardGame.assignDecks(players, decks);
@@ -71,7 +71,7 @@ class CardGameTest {
 	}
 	
 	@Test
-	void test5() {
+	void testFileNotFoundHandled() {
 		InvalidPackException thrown = assertThrows(
 				InvalidPackException.class,
 		           () -> CardGame.loadPack("invalid.txt", 4),

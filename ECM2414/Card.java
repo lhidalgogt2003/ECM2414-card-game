@@ -13,11 +13,10 @@ public class Card {
 	private final int faceValue;
 
 	/**
-	 * Card is an event listener that uses a super class to
+	 * Card is an object that is assigned a
 	 * @param faceValue int value of card
  	*/
 	public Card(int faceValue) {
-		super();
 		this.faceValue = faceValue;
 	}
 

@@ -148,4 +148,16 @@ public class Player implements Runnable {
 		logger.println(String.format("player %d final hand %s", id, getHand()));
 		logger.close();
 	}
+
+    public int getID() {
+		return id;
+    }
+
+	public Deck getLeftDeck() {
+		return left;
+	}
+
+	public Deck getRightDeck() {
+		return right;
+	}
 }

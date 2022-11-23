@@ -1,29 +1,42 @@
 package ECM2414;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DeckTest {
+	static Deck deck;
+
+	@BeforeAll
+	static void init() {
+		deck = new Deck(1);
+	}
 
 	@Test
-	void test() {
-		Deck deck = new Deck(1);
+	void testDeckConstruction() {
 		assertEquals(1, deck.getId());
 		assertTrue(deck.isEmpty());
 		assertEquals(0, deck.size());
+		assertNull(deck.draw());
+	}
 
+	@Test
+	void testAddingCardsToDeck() {
 		for (int i = 2; i < 5; i++) {
 			deck.add(new Card(i));
 		}
 		assertFalse(deck.isEmpty());
 		assertEquals(3, deck.size());
+	}
+
+	@Test
+	void testDrawingCardsFromDeck() {
 		for (int i = 2; i < 5; i++) {
 			assertEquals(i, deck.draw().getFaceValue());
 		}
 		assertEquals(0, deck.size());
 		assertTrue(deck.isEmpty());
-		
 	}
 
 }

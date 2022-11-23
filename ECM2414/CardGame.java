@@ -35,8 +35,8 @@ public class CardGame {
 			String filename = in.nextLine();
 			Deck pack = loadPack(filename, n);
 			GameState state = new GameState();
-			Player[] players = initializePlayers(n, state);
-			Deck[] decks = initializeDecks(n);
+			Player[] players = initialisePlayers(n, state);
+			Deck[] decks = initialiseDecks(n);
 			
 			distributeCards(pack, players, decks);
 			assignDecks(players, decks);
@@ -57,6 +57,7 @@ public class CardGame {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * sets a deck to the left and to the right
      * to the player with index i
@@ -97,7 +98,7 @@ public class CardGame {
 	 * @param state		GameState for players to use
      * @return a list of players
  	*/  
-	public static Player[] initializePlayers(int n, GameState state) throws FileNotFoundException {
+	public static Player[] initialisePlayers(int n, GameState state) throws FileNotFoundException {
 		Player[] players = new Player[n];
 		for (int i = 0; i < n; i++) {
 			players[i] = new Player(i + 1, state);
@@ -110,7 +111,7 @@ public class CardGame {
      * @param n players :. n decks
      * @return an array of decks
  	*/ 
-	public static Deck[] initializeDecks(int n) {
+	public static Deck[] initialiseDecks(int n) {
 		Deck[] decks = new Deck[n];
 		for (int i = 0; i < n; i++) {
 			decks[i] = new Deck(i + 1);
@@ -121,7 +122,7 @@ public class CardGame {
     /**
 	 * loads the pack to play the game
      * @param filename to load pack from
-	 * @param n number of players
+	 * @param n number of players the pack should have cards
      * @return the pack to play the game
  	*/ 
 	public static Deck loadPack(String filename, int n) throws InvalidPackException {

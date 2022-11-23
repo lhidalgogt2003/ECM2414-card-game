@@ -61,8 +61,7 @@ public class Deck {
 			if (cards.isEmpty()) {
 				return null;
 			}
-			return cards.remove(0);
-		}
+			return cards.remove(0); }
 	}
 	/**
 	 * checks the size of the arraylist 
