@@ -1,6 +1,9 @@
-package ECM2414;
+package tests;
 
-import org.junit.jupiter.api.BeforeAll;
+import ECM2414.Card;
+import ECM2414.Deck;
+import ECM2414.GameState;
+import ECM2414.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +31,7 @@ class PlayerTest {
 	}
 
 	@Test
-	void testDeckAssign() {
+	void testDeckAssign() throws FileNotFoundException {
 		Deck left = new Deck(0);
 		for (int i = 2; i < 5; i++) {
 			left.add(new Card(i));

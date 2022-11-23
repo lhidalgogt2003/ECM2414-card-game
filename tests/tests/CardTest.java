@@ -1,5 +1,6 @@
-package ECM2414;
+package tests;
 
+import ECM2414.Card;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

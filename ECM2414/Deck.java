@@ -1,13 +1,12 @@
 package ECM2414;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
 /**
- * Deck is a class that 
- * gets the id of each card and stores them
- * in an arraylist and checks if there
- * are no cards in the deck
+ * Deck is a class with the primary function of storing an array of cards
  * @author George Hynes, Luis Hidalgo
  * @version 1.0
  * 
@@ -16,18 +15,23 @@ import java.util.ArrayList;
 public class Deck {
 	private final int id;
 	private final ArrayList<Card> cards;
+	private PrintWriter logger = null;
 	
 	/**
-	 * gets the id of each card into an array list
+	 * Constructs a deck object with given id and prepares a log file
 	 * @param id of deck for construction
  	*/  
-	public Deck(int id) {
+	public Deck(int id) throws FileNotFoundException {
 		this.id = id;
 		cards = new ArrayList<>();
+
+		if (id > 0) {
+			// because of zero-indexing, this deck won't need a logfile
+			logger = new PrintWriter(String.format("deck%d_output.txt", id));
+		}
 	}
 
 	/**
-	 * gets the id of the card
 	 * @return id of the card
  	*/  
 	public int getId() {
@@ -43,8 +47,7 @@ public class Deck {
 	}
 
 	/**
-	 * synchronises the arraylist of cards
-	 * and adds a card to the deck
+	 * adds a card to the deck
 	 * @param card to add to deck
  	*/  
 	public void add(Card card) {
@@ -52,9 +55,10 @@ public class Deck {
 			cards.add(card);
 		}
 	}
+
 	/**
-	 * removes a card to the deck to the right
-	 * @return the index of the card removed
+	 * removes a card from the deck
+	 * @return the card removed
  	*/  
 	public Card draw() {
 		synchronized (cards) {
@@ -63,12 +67,26 @@ public class Deck {
 			}
 			return cards.remove(0); }
 	}
+
 	/**
-	 * checks the size of the arraylist 
-	 *  of cards
-	 * @return size of the arraylist cards
+	 * @return number of cards in deck
  	*/  
 	public int size() {
 		return cards.size();
+	}
+
+	/**
+	 * logs deck to file
+	 */
+	public void logHand() {
+		if (logger != null) {
+			StringBuilder sb = new StringBuilder();
+			for (Card c : cards) {
+				sb.append(c.toString());
+				sb.append(" ");
+			}
+			logger.println(String.format("deck %d contents: %s", id, sb));
+			logger.close();
+		}
 	}
 }

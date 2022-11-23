@@ -1,5 +1,6 @@
-package ECM2414;
+package tests;
 
+import ECM2414.GameState;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

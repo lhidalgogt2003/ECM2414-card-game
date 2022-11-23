@@ -2,17 +2,19 @@
 
 ## Introduction
 
-This game is a pair-programming project that uses a multi-threading interface to run a card game with an amount of players n, until one of the players has a hand of the same four cards.
-
+This game is a pair-programming project that uses a multi-threading interface to run a card game with a number of players _n_ and a number of decks (also _n_). 
+The decks and players form a ring topology. 
+At the start of the game, each player is distributed four cards in a round-robin fashion, from the top of the pack.
+After the hands have been dealt, the decks will then be filled from the remaining cards in the pack, again in a round-robin fashion.
 ### How to use the project
 
-CardGame contains the main function where all the threads are started and where the functionality begins, with player also starting threads for every player entered by the user.
+CardGame contains the main function where all the threads are started and where the functionality begins.
 
-Deck and Card classes contain arraylists with the cards used for the game. The game state is used to check if the game has finsished.
+Deck and Card represent the obvious. The GameState object is used by players to check if the game has finished and, if so, who has won.
 
 ### Testing
 
-The test are refered to the classes used one test class per class used with Junit tests and assertions used for testing.
+The tests are designed for use with JUnit 5.7.0.
 
 - **CardGameTest**
 - **CardTest**
@@ -22,7 +24,7 @@ The test are refered to the classes used one test class per class used with Juni
 
 ### Running
 
-To run the game run **jar file**, enter number of **players** and location of the **pack file** to use; sample packfile given.
+To run the game, run the **jar file**, enter number of **players** and location of the **pack file** to use - sample pack file provided.
 
 ### File Management
 
@@ -34,12 +36,12 @@ To run the game run **jar file**, enter number of **players** and location of th
     - GameState.java
     - InvalidPackException.java
     - Player.java
+  - tests
     - CardGameTest.java
     - CardTest.java
     - DeckTest.java
     - GameStateTest.java
     - PlayerTest.java
-  - .gitattributes
   - five.txt
   - four.txt
   - README.md
@@ -47,5 +49,5 @@ To run the game run **jar file**, enter number of **players** and location of th
 ## Details
 
 - Project Created by **Luis Hidalgo** and **George Hynes**
-- Github repostery: **<https://github.com/lhidalgogt2003/ECM2414-card-game>**
-- pack file: **four.txt**, **five.txt**
+- GitHub repository: **<https://github.com/lhidalgogt2003/ECM2414-card-game>**
+- pack files: **four.txt**, **five.txt**

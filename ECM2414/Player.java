@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Player is a class that implements runnable
- * gets the card from the card class
- * gives a hand to each player
- * and determines how has won the game
+ * Each Player object stores the player's hand, which deck is on its 'left' and 'right'
+ * and keeps track of the GameState to enable multi-threaded execution
  * @author George Hynes, Luis Hidalgo
  * @version 1.0
  *
@@ -23,8 +21,8 @@ public class Player implements Runnable {
 	private final PrintWriter logger;
 
     /**
-	 * gets the id, hand and state of the game of the player
-     * and logs to the file
+	 * Constructs a Player object with the given id and GameState and
+     * prepares a log file
 	 * @param id of the player to construct
      * @param state GameState of game
  	*/
@@ -32,24 +30,25 @@ public class Player implements Runnable {
 		this.id = id;
 		this.hand = new ArrayList<>();
 		this.state = state;
-		logger = new PrintWriter(String.format("player%d.txt", id));
+		logger = new PrintWriter(String.format("player%d_output.txt", id));
+
 	}
 
 	/**
-	 * gets hand the player
-	 * @return the hand of the player
+	 * get the Player's hand as String
+	 * @return String hand of the player
 	 */
-	String getHand() {
+	public String getHand() {
 		StringBuilder sb = new StringBuilder();
 		for (Card c : hand) {
 			sb.append(c);
-			sb.append(' ');
+			sb.append(" ");
 		}
 		return sb.toString();
 	}
 
     /**
-	 * adds a card to the hand of the player
+	 * add a card to the Player's hand
 	 * @param card to add
  	*/
 	public void addCard(Card card) {
@@ -73,7 +72,7 @@ public class Player implements Runnable {
 	}
 
     /**
-	 * the method shuffles the cards, draws
+	 * the method shuffles the hand, draws
      * the card from the left deck
      * and removes a card from the player hand
      * to the right deck
@@ -83,8 +82,10 @@ public class Player implements Runnable {
 		Collections.shuffle(hand);
 		Card card = hand.get(0);
 		int removeIndex = 0;
-		if (card.getFaceValue() == id) {
+		// don't discard a preferred card (ie. same as id or a card you already hold)
+		if (card.getFaceValue() == id || doesHandContainThis(card)) {
 			for (int i = 1; i < 4; i++) {
+				// if you have to discard a card, make sure it's not the same as id
 				if (id != hand.get(i).getFaceValue()) {
 					removeIndex = i;
 				}
@@ -92,10 +93,10 @@ public class Player implements Runnable {
 		}
 		return hand.remove(removeIndex);
 	}
+
     /**
 	 * checks if all the cards have the same face value
-     * and if so returns true stating the player has won
-     * the game
+     * and if so returns true indicating that the player has won the game
 	 * @return if player has won
  	*/
 	public boolean hasWon() {
@@ -107,11 +108,9 @@ public class Player implements Runnable {
 		return true;
 	}
     /**
-	 * Starts all the threads for the player
-     * and stars the player movements in the game
-     * drawing and discarding the cards from each deck
-     * depending on the player Id
-     * whilst checking if the player has won the game
+	 * Starts the player within the game
+     * Logic for drawing and discarding the cards into and from the player's hand
+     * whilst checking if the player has won the game and whether someone else has won the game
  	*/
 	@Override
 	public void run() {
@@ -131,10 +130,10 @@ public class Player implements Runnable {
 				do {
 					newCard = left.draw();
 				} while (newCard == null);
-				
+
 				Card toDiscard = drawCard();
-				right.add(toDiscard);
 				hand.add(newCard);
+				right.add(toDiscard);
 				logger.println(String.format("player %d draws a %d from deck %d ", id, newCard.getFaceValue(), left.getId()));
 				logger.println(String.format("player %d discards a %d to deck %d ", id, toDiscard.getFaceValue(), right.getId()));
 				logger.println(String.format("player %d current hand %s", id, getHand()));
@@ -149,15 +148,36 @@ public class Player implements Runnable {
 		logger.close();
 	}
 
+	/**
+	 * @return id of player
+	 */
     public int getID() {
 		return id;
     }
 
+	/**
+	 * @return deck to the 'left' of the player
+	 */
 	public Deck getLeftDeck() {
 		return left;
 	}
 
+	/**
+	 * @return deck to the 'right' of the player
+	 */
 	public Deck getRightDeck() {
 		return right;
+	}
+
+	/**
+	 * @return true if a card of the same face value is within the Player's hand
+	 */
+	private boolean doesHandContainThis(Card c) {
+		for (Card card_in_hand: hand) {
+			if (c.getFaceValue() == card_in_hand.getFaceValue()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

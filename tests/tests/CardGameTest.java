@@ -1,5 +1,6 @@
-package ECM2414;
+package tests;
 
+import ECM2414.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -12,18 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class CardGameTest {
 
 	@Test
-	void testPackLoad() {
+	void testPackLoad() throws InvalidPackException, FileNotFoundException {
 		Deck pack;
-		try {
-			pack = CardGame.loadPack("four.txt", 4);
-			assertEquals(32, pack.size());
-		} catch (InvalidPackException e) {
-			e.printStackTrace();
-		}
+		pack = CardGame.loadPack("four.txt", 4);
+		assertEquals(32, pack.size());
 	}
 
 	@Test
-	void testDecksInitialisation() {
+	void testDecksInitialisation() throws FileNotFoundException {
 		Deck[] decks = CardGame.initialiseDecks(4);
 		assertEquals(4, decks.length);
 	}

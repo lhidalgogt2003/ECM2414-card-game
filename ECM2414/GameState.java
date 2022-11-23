@@ -1,16 +1,11 @@
 package ECM2414;
 
-
 /**
- * GameSate is a class that checks if the game
- * has finished and which player has won the game
- * and synchronizes the scheduler so the threads
- * stops when the game is won by a player.
+ * GameSate is a class that stores whether the game
+ * has finished and, if so, which player has won the game
  * @author George Hynes, Luis Hidalgo
  * @version 1.0
- * 
  */
-
 
 
 public class GameState {

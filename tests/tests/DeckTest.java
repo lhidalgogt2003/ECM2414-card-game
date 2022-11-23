@@ -1,7 +1,11 @@
-package ECM2414;
+package tests;
 
+import ECM2414.Card;
+import ECM2414.Deck;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,7 +13,7 @@ class DeckTest {
 	static Deck deck;
 
 	@BeforeAll
-	static void init() {
+	static void init() throws FileNotFoundException {
 		deck = new Deck(1);
 	}
 
